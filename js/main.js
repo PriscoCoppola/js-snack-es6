@@ -86,5 +86,80 @@ console.table(newTeams);
 
 // Functions
 function randomNumber(min, max) {
-    return Math.floor( Math.random() * (max - min)) + min;
+    return Math.floor( Math.random() * (max - min + 1)) + min;
+}
+
+/*
+* jSnack 3
+*
+* Si scriva una funzione che accetti tre argomenti, un array e due numeri (a più piccolo di b).
+* La funzione ritornerà un nuovo array con i valori che hanno la posizione compresa tra i due numeri
+* inseriti dall'utente (è possibile usare, ad esempio, for/foreach/filter
+*/
+
+console.log('------- jSnack 3 ---------');
+
+const user = ['Paolo', 'Lorenzo', 'Fabio', 'Mattia', 'Giorgio', 'Nicola', 'Roberto'];
+
+let min = parseInt( prompt('Inserisci un numero da 0 a ' + user.length) );
+while (isNaN(min) || min < 0 || min > user.length) {
+    min = parseInt( prompt('Inserisci un numero da 0 a ' + user.length) );
+}
+let max = parseInt( prompt('Inserisci un numero da ' + min + ' a ' + user.length) );
+while (isNaN(max) || max < min || max > user.length) {
+    max = parseInt( prompt('Inserisci un numero da ' + min + ' a ' + user.length) );
+}
+
+const newUser = user.filter((element, index) => {
+    return (min <= index && max >= index);
+})
+
+console.log(newUser);
+
+/*
+* jsnack 4
+* 
+* Dato un'array con dei capi d'abbigliamento
+* Oggetti che contengono informazioni su nome modello, tipologia e colore 
+* Si aggiunga a ciascun elemento una ulteriore proprietà che indichi il costo del prodotto.
+* Per inserire il costo del singolo prodotto si scriva una funzione che generi un numero random da 10 a 50 (potete sfruttare il map per aggiungere la nuova proprietà)
+*/
+
+console.log('------- jSnack 4 ---------');
+
+const vestiti = [
+    {
+        nome: 'Maglia',
+        modello: 'Estivo',
+        tipologia: 'Cotone',
+        colore: 'Blu'
+    },
+    {
+        nome: 'Pantalone',
+        modello: 'Primavera',
+        tipologia: 'Lana',
+        colore: 'Rosa',
+    },
+    {
+        nome: 'Slip',
+        modello: 'Invernale',
+        tipologia: 'Poliestere',
+        colore: 'Azzurro',
+    },
+];
+
+const newVestiti = vestiti.map((element) => {
+    const newArray = {
+        ...element,
+        prezzo: randomNumber(10, 50), 
+    }
+
+    return newArray;
+})
+
+console.log(newVestiti);
+
+// Function
+function randomNumber(min, max) {
+    return Math.floor( Math.random() * (max - min + 1)) + min;
 }
